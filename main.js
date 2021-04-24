@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 var projectUrl = 'https://api.sheety.co/6087c045e0474f4f8b8e9cd4c972c0a8/productQuest';
 
 function loadCues() {
-	fetch(projectUrl + '/Cues')
+	fetch(projectUrl + '/cues')
 	.then((response) => response.json())
 	.then(json => {
 		this.cues = json.cues.sort((a, b) => {
@@ -48,29 +48,29 @@ function drawSports() {
 
 function showAllCues() {
 	this.title = "All Cues";
-	drawCues(this.Cues);
+	drawCues(this.cues);
 }
 
 function showSport(sport) {
 	this.title = sport;
-	let filteredCues = this.Cues.filter(Cue => {
-		return Cue.sport == sport;
+	let filteredCues = this.cues.filter(cue => {
+		return cue.sport == sport;
 	});
 	drawCues(filteredCues);
 }
 
 function upvoteCue(id) {
-	let cue = this.Cues.find(Cue => {
-		return Cue.id == id;
+	let cue = this.cues.find(cue => {
+		return cue.id == id;
 	});
-	Cue.votes = Cue.votes + 1;
-	Cue.hasVoted = true;
+	cue.votes = cue.votes + 1;
+	cue.hasVoted = true;
 	
 	let headers = new Headers();
 	headers.set('content-type', 'application/json');
-	fetch(projectUrl + '/Cues/' + id, {
+	fetch(projectUrl + '/cues/' + id, {
 		method: 'PUT',
-		body: JSON.stringify({ Cue: Cue }),
+		body: JSON.stringify({ cue: cue }),
 		headers: headers
 	});
 	
