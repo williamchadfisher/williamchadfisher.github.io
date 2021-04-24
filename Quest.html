@@ -51,8 +51,8 @@
 					<p class="m-0">{{cue.shortDescription}}</p>
 					<p class="m-0 text-muted"><small>{{cue.sport}}</small></p>
 				</div>
-				<button class="btn btn-outline-primary" onclick="upvotecue({{cue.id}});" {{#if cue.hasVoted}}disabled{{/if}}>
-					&#x21e7; {{cue.votes}}
+				<button class="btn btn-outline-primary" onclick="upvoteCue({{Cue.id}});" {{#if Cue.hasVoted}}disabled{{/if}}>
+					&#x21e7; {{Cue.votes}}
 				</button>
 			</div>
 		{{/each}}
