@@ -16,7 +16,7 @@
 <!-- Template for the main menu / categories -->
 <script id="menu-template" type="text/x-handlebars-template">
 	<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm mb-4">
-		<a class="navbar-brand" href="#" onclick="showAllProducts();">Mental Cues</a>
+		<a class="navbar-brand" href="#" onclick="showAllcues();">Mental Cues</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -30,44 +30,44 @@
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
-					<a href="mailto:williamchadfisher@gmail.com?subject=Submit Tip" class="btn btn-outline-primary">Submit Product</a>
+					<a href="mailto:williamchadfisher@gmail.com?subject=Submit Cue" class="btn btn-outline-primary">Submit Cue</a>
 				</li>
 			</ul>
 		</div>
 	</nav>
 </script>
 
-<!-- Template for the products -->
-<script id="products-template" type="text/x-handlebars-template">
+<!-- Template for the cues -->
+<script id="cues-template" type="text/x-handlebars-template">
 	<h3>{{title}}</h3>
 	<div class="shadow-sm bg-white rounded-lg">
-		{{#each this.products as |product|}}
-			<div class="media border-bottom p-3" id="product-{{product.id}}">
-				<img src="{{product.iconUrl}}" width="50" class="mr-3">
+		{{#each this.cues as |cue|}}
+			<div class="media border-bottom p-3" id="cue-{{cue.id}}">
+				<img src="{{cue.iconUrl}}" width="50" class="mr-3">
 				<div class="media-body">
 					<h6 class="m-0">
-						<a href="{{product.website}}" target="_blank">{{product.name}}</a>
+						<a href="{{cue.website}}" target="_blank">{{cue.name}}</a>
 					</h6>
-					<p class="m-0">{{product.shortDescription}}</p>
-					<p class="m-0 text-muted"><small>{{product.category}}</small></p>
+					<p class="m-0">{{cue.shortDescription}}</p>
+					<p class="m-0 text-muted"><small>{{cue.category}}</small></p>
 				</div>
-				<button class="btn btn-outline-primary" onclick="upvoteProduct({{product.id}});" {{#if product.hasVoted}}disabled{{/if}}>
-					&#x21e7; {{product.votes}}
+				<button class="btn btn-outline-primary" onclick="upvotecue({{cue.id}});" {{#if cue.hasVoted}}disabled{{/if}}>
+					&#x21e7; {{cue.votes}}
 				</button>
 			</div>
 		{{/each}}
-		{{#unless this.products}}
-			<p class="p-5 text-center text-muted">No products found</p>
+		{{#unless this.cues}}
+			<p class="p-5 text-center text-muted">No cues found</p>
 		{{/unless}}
 	</div>
 </script>
 </head>
 <body class="bg-light">
 	<div id="menu-container"></div>
-	<div class="container" id="products-container">
-		<!-- Loading indicator: this gets replaced when we have products -->
+	<div class="container" id="cues-container">
+		<!-- Loading indicator: this gets replaced when we have cues -->
 		<div class="text-center p-5 m-5">
-			<div class="text-muted p-2">Loading products...</div>
+			<div class="text-muted p-2">Loading cues...</div>
 			<div class="spinner-border text-primary" role="status"></div>
 		</div>
 	</div>
