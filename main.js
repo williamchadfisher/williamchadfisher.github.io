@@ -1,78 +1,78 @@
-var products = null;
-var categories = null;
+var cues = null;
+var sports = null;
 var title = null;
 
 // Called once the page has loaded
 document.addEventListener('DOMContentLoaded', function(event) {
-	loadProducts();
-	loadCategories();
+	loadCues();
+	loadSports();
 });
 
 // Replace this with your Sheety URL
 // Make sure NOT to include the sheet name in the URL (just the project name!)
 var projectUrl = 'https://api.sheety.co/6087c045e0474f4f8b8e9cd4c972c0a8/productQuest';
 
-function loadProducts() {
-	fetch(projectUrl + '/products')
+function loadCues() {
+	fetch(projectUrl + '/cues')
 	.then((response) => response.json())
 	.then(json => {
-		this.products = json.products.sort((a, b) => {
+		this.cues = json.cues.sort((a, b) => {
 			return a.votes < b.votes;
 		})
-		showAllProducts();
+		showAllCues();
 	});
 }
 
-function loadCategories() {
-	fetch(projectUrl + '/categories')
+function loadSports() {
+	fetch(projectUrl + '/sports')
 	.then((response) => response.json())
 	.then(json => {
-		this.categories = json.categories;
-		drawCategories();
+		this.sports = json.sports;
+		drawSports();
 	})
 }
 
-function drawProducts(products) {
-	var template = Handlebars.compile(document.getElementById("products-template").innerHTML);
-	document.getElementById('products-container').innerHTML = template({
+function drawCues(cues) {
+	var template = Handlebars.compile(document.getElementById("cues-template").innerHTML);
+	document.getElementById('cues-container').innerHTML = template({
 		title: this.title,
-		products: products	
+		cues: cues	
 	});
 }
 
-function drawCategories() {
+function drawSports() {
 	var template = Handlebars.compile(document.getElementById("menu-template").innerHTML);
-	console.log('draw ', this.products);
-	document.getElementById('menu-container').innerHTML = template(this.categories);
+	console.log('draw ', this.cues);
+	document.getElementById('menu-container').innerHTML = template(this.sports);
 }
 
-function showAllProducts() {
-	this.title = "All Products";
-	drawProducts(this.products);
+function showAllCues() {
+	this.title = "All Cues";
+	drawCues(this.cues);
 }
 
-function showCategory(category) {
-	this.title = category;
-	let filteredProducts = this.products.filter(product => {
-		return product.category == category;
+function showSport(sport) {
+	this.title = sport;
+	let filteredCues = this.cues.filter(cue => {
+		return cue.sport == sport;
 	});
-	drawProducts(filteredProducts);
+	drawCues(filteredCues);
 }
 
-function upvoteProduct(id) {
-	let product = this.products.find(product => {
-		return product.id == id;
+function upvoteCue(id) {
+	let cue = this.cues.find(cue => {
+		return cue.id == id;
 	});
-	product.votes = product.votes + 1;
-	product.hasVoted = true;
+	cue.votes = cue.votes + 1;
+	cue.hasVoted = true;
 	
 	let headers = new Headers();
 	headers.set('content-type', 'application/json');
-	fetch(projectUrl + '/products/' + id, {
+	fetch(projectUrl + '/cues/' + id, {
 		method: 'PUT',
-		body: JSON.stringify({ product: product }),
+		body: JSON.stringify({ cue: cue }),
 		headers: headers
 	});
 	
-	showAllProducts();
+	showAllCues();
 }
